@@ -1,0 +1,23 @@
+# files
+__pycache__/
+.ipynb_checkpoints
+utils.py
+reqs/*
+data/CNN_test.csv
+data/loslagos-comunas.csv
+dataset-loslagos-8months.csv
+data/SBW-vectors-300-min5.bin.gz
+2021-10-bertopic.csv
+data/topics.csv
+data/bertopic.csv
+message.txt
+data/noticias_etiquetadas.csv
+data/clusters.csv
+sophia-key.txt
+data/clusterss.csv
+data/dff.csv
+data/clusterss2.csv
+data/clustersss.csv
+data/df.csv
+data/dfff.csv
+coherence.ipynb
