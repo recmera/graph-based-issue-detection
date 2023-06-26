@@ -160,3 +160,54 @@ def keyword_distribution(dataframe):
     plt.ylabel('Frecuencia')
     plt.xticks(range(len(words)), words, rotation=90)
     plt.title('Distribución de palabras por frecuencia')
+    
+    
+def community_louvain(graph):
+    
+    import community
+    from community import community_louvain
+
+    # Calcular la partición utilizando el algoritmo de Louvain
+    partition = community_louvain.best_partition(graph)
+
+    # Convertir la partición en un diccionario
+    partition_dict = {}
+    for node, comm in partition.items():
+        partition_dict[node] = comm
+
+    # Calcular la modularidad
+    modularity = community.modularity(partition, graph)
+
+    # Visualizar el grafo con la partición coloreada
+    pos = nx.spring_layout(graph)  # Posiciones de los nodos para el layout
+    cmap = plt.get_cmap("tab10")  # Mapa de colores para las comunidades
+    plt.figure(figsize=(10, 6))  # Tamaño de la figura
+
+    # Dibujar los nodos de cada comunidad con colores diferentes
+    for community_id in set(partition_dict.values()):
+        nodes = [node for node, comm_id in partition_dict.items() if comm_id == community_id]
+        nx.draw_networkx_nodes(
+            graph,
+            pos,
+            nodelist=nodes,
+            node_color=cmap(community_id),
+            node_size=200,
+            alpha=0.8,
+        )
+
+    # Dibujar las aristas del grafo
+    nx.draw_networkx_edges(graph, pos, alpha=0.5)
+
+    # Mostrar etiquetas de los nodos
+    nx.draw_networkx_labels(graph, pos, font_size=8, font_color="black")
+
+    # Mostrar información de la modularidad en el título
+    plt.title("Red con Modularidad: {:.3f}".format(modularity))
+
+    # Ocultar ejes
+    plt.axis("off")
+
+    # Mostrar el gráfico
+    plt.show()
+    
+    return partition_dict
