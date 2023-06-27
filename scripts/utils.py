@@ -5,13 +5,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def clean_title(df):
-    for index, row in df.iterrows():
-        title = row['title']
-        split_title = title.split('-')
-        cleaned_title = split_title[0].strip()  # Elimina espacios en blanco alrededor del texto
-        df.at[index, 'title'] = cleaned_title
-        return df
 
 def get_representative_description(doc):
     pattern = r"'([^']*)'"
