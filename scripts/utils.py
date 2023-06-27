@@ -114,7 +114,7 @@ def generate_graph_from_dataframe(dataframe):
         for existing_topic, existing_keywords in graph.nodes(data='keywords'):
             if existing_topic != topic:  # Evitar conexión consigo mismo
                 common_keywords = set(unique_keywords).intersection(existing_keywords)
-                if common_keywords:
+                if common_keywords and len(common_keywords)>1:
                     graph.add_edge(topic, existing_topic, keywords=common_keywords)
 
     # Visualizar el grafo
